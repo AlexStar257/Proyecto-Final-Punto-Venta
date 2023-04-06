@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "bootstrap": "^5.3.0-alpha3",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.4",
+    "express-myconnection": "^1.0.4",
+    "express-session": "^1.17.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.2.0",
+    "path": "^0.12.7",
+    "router": "^1.3.7"
+  },
+  "scripts": {
+    "run-nodemon": "nodemon app.js",
+    "run-tailwind": "npx tailwindcss -i ./src/css/main.css -o ./public/css/main.css --watch",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20",
+    "tailwindcss": "^3.2.4"
+  },
+  "name": "proyecto-final-web-carrito",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
