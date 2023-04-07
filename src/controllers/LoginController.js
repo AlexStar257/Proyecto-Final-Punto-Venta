@@ -22,6 +22,14 @@ function auth(req, res) {
                             req.session.loggedin = true;
                             req.session.name = element.name;
                             res.redirect('/');
+
+                        // -- Función de admin y usuarios en LOGIN --
+
+                            // if (data.tipo === 'administrador') {
+                            //     res.redirect('/admin');
+                            // } else {
+                            //     res.redirect('/user');
+                            // }
                         }
                     });
                 });
@@ -31,8 +39,6 @@ function auth(req, res) {
         });
     });
 }
-
-
 
 function register(req, res) {
     if (req.session.loggedin != true) {
@@ -53,9 +59,12 @@ function storeUser(req, res) {
                 bcrypt.hash(data.password, 12).then(hash => {
                     data.password = hash;
 
+                    data.domicilio = req.body.domicilio;
+                    data.telefono = req.body.telefono;
+
                     req.getConnection((err, conn) => {
                         conn.query('INSERT INTO usuarios SET ?', [data], (err, rows) => {
-                            req.session.loggedin = true;
+                            req.session.loggedin = false;
                             req.session.name = data.name;
                             res.redirect('/login');
                         });
