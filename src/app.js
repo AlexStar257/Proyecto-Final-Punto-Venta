@@ -25,6 +25,8 @@ app.engine('ejs', require('ejs').__express);
 
 //middlewares
 app.use(morgan('dev'));
+
+
 //Conexión Base de Datos
 app.use(myconnection(mysql,{
 	host: 'localhost',
