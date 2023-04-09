@@ -1,3 +1,4 @@
+<%- include('../partials/login') %>
 <section class="vh-100 gradient-custom">
     <form action="/register" method="POST">
         <div class="container py-5 h-100">
@@ -39,9 +40,7 @@
                                     <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
                                     <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
                                 </div>
-                                {{#if error}}
-                                <p class="fw-bold mb-2 text-uppercase text-warning">{{error}}</p>
-                                {{/if}}
+                                <p class="fw-bold mb-2 text-uppercase text-warning"></p>
                             </div>
                         </div>
                     </div>

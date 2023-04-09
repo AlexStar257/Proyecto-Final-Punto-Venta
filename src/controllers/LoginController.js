@@ -17,7 +17,7 @@ function auth(req, res) {
                 userdata.forEach(element => {
                     bcrypt.compare(data.password, element.password, (err, isMatch) => {
                         if (!isMatch) {
-                            res.render('login/index', { error: 'Error: ¡Contraseña incorrecta!' });
+                            return res.status(400).send("¡Contraseña Incorrecta!");
                         } else {
                             req.session.loggedin = true;
                             req.session.name = element.name;
@@ -34,7 +34,7 @@ function auth(req, res) {
                     });
                 });
             } else {
-                res.render('login/index', { error: 'Error: ¡El usuario no existe!' });
+                return res.status(400).send("¡El Usuario NO existe!");
             }
         });
     });
@@ -54,7 +54,7 @@ function storeUser(req, res) {
     req.getConnection((err, conn) => {
         conn.query('SELECT * FROM usuarios WHERE email = ?', [data.email], (err, userdata) => {
             if (userdata.length > 0) {
-                res.render('login/register', { error: 'Error: ¡El usuario ya existe!' });
+                return res.status(400).send("¡El Usuario YA existe!");
             } else {
                 bcrypt.hash(data.password, 12).then(hash => {
                     data.password = hash;

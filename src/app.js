@@ -1,9 +1,13 @@
 const express = require('express');
-const { engine } = require('express-handlebars');
 const myconnection = require('express-myconnection');
 const mysql = require('mysql');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const path = require('path')
+const morgan = require('morgan');
+
+//Importando rutas
+const productosRoutes = require('./routes/productos');
 
 // Iniciar puerto 
 const app = express();
@@ -12,6 +16,15 @@ app.listen(app.get('port'), () => {
 	console.log('Iniciando en puerto: ', app.get('port'));
 });
 
+
+//Cambiar extensión a archivos ejs
+app.set('views', path.join(__dirname, '/views'));
+app.set('view engine','ejs');
+app.engine('ejs', require('ejs').__express);
+
+
+//middlewares
+app.use(morgan('dev'));
 //Conexión Base de Datos
 app.use(myconnection(mysql,{
 	host: 'localhost',
@@ -19,14 +32,8 @@ app.use(myconnection(mysql,{
 	password: '',
 	port: 3306,
 	database: 'mtt'
-}));
+},'single'));
 
-//Cambiar extensión a archivos hbs
-app.set('views', __dirname + '/views');
-app.engine('.hbs', engine({
-	extname: '.hbs',
-}));
-app.set('view engine', 'hbs');
 
 //Ocultar rutas(?
 app.use(bodyParser.urlencoded({
@@ -44,6 +51,7 @@ app.use(session({
 	saveUninitialized : true,
 }))
 
+//Rutas
 app.get('/', (req,res) => {
 	if (req.session.loggedin == true) {
         res.render('home', {name: req.session.name});
@@ -52,5 +60,19 @@ app.get('/', (req,res) => {
     }
 });
 
+app.get('/', (req,res) => {
+	if (req.session.loggedin == true) {
+        res.render('productos', {name: req.session.name});
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.use('/', productosRoutes);
+
+//Archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/', loginRoutes);
+
 
