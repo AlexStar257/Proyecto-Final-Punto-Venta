@@ -64,7 +64,15 @@ app.get('/', (req,res) => {
 
 app.get('/', (req,res) => {
 	if (req.session.loggedin == true) {
-        res.render('productos', {name: req.session.name});
+        res.render('admin/productos', {name: req.session.name});
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.get('/nosotros', (req,res) => {
+	if (req.session.loggedin == true) {
+        res.render('usuarios/nosotros', {name: req.session.name});
     } else {
         res.redirect('/login');
     }

@@ -15,7 +15,7 @@ controller.list = (req,res) =>{
                 res.json(err); //next(err);
             }
             console.log(productos);
-            res.render('productos',{
+            res.render('admin/productos',{
                 data: productos,
             });
         });
@@ -58,7 +58,7 @@ controller.edit = (req,res)=>{
     const {id} = req.params;
     req.getConnection((err,conn)=>{
         conn.query('SELECT * FROM productos WHERE id = ?',[id], (err,productos)=>{
-            res.render('editarProductos',{
+            res.render('admin/editarProductos',{
             data: productos[0]
         });
         });
@@ -85,7 +85,7 @@ controller.buscar = (req, res) => {
           if (err) {
             res.json(err);
           }
-          res.render('productos', {
+          res.render('admin/productos', {
             data: productos,
           });
         }
