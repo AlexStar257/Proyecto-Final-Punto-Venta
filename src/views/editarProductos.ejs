@@ -1,0 +1,52 @@
+<%- include('./partials/admin') %>
+
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-5 offset-md-3 card bg-dark">
+        <div class="card-body">
+          <form action="/update/<%= data.id %>" method="POST">
+            <input
+            type="text"
+            name="nombre"
+            placeholder="Nombre"
+            value="<%= data.nombre%>"
+            class="form-control mb-2"
+            autofocus
+          />
+          <input
+            type="text"
+            name="descripcion"
+            value="<%= data.descripcion%>"
+            placeholder="Descripcion"
+            class="form-control mb-2"
+          />
+          <input
+            type="number"
+            name="precio"
+            value="<%= data.precio%>"
+            placeholder="Precio"
+            class="form-control mb-2"
+          />
+          <input
+          type="file" 
+          accept="image/png,image/jpeg" 
+          id="urlImagen" 
+          name="urlImagen"
+          value="<%= data.urlImagen%>"
+          class="form-control mb-2"
+          autofocus
+        />
+        <input
+          type="number"
+          name="disponibilidad"
+          value="<%= data.disponibilidad%>"
+          placeholder="Disponibilidad"
+          class="form-control mb-2"
+        />
+  
+            <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
