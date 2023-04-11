@@ -19,17 +19,17 @@ function auth(req, res) {
                         if (!isMatch) {
                             return res.status(400).send("¡Contraseña Incorrecta!");
                         } else {
-                            req.session.loggedin = true;
-                            req.session.name = element.name;
-                            res.redirect('/');
-
-                        // -- Función de admin y usuarios en LOGIN --
-
-                            // if (data.tipo === 'administrador') {
-                            //     res.redirect('/admin');
-                            // } else {
-                            //     res.redirect('/user');
-                            // }
+                            if (element.tipo === 'administrador') {
+                                req.session.loggedin = true;
+                                req.session.name = element.name;
+                                res.redirect('/admin/home');
+                            } else if (element.tipo === 'usuario') {
+                                req.session.loggedin = true;
+                                req.session.name = element.name;
+                                res.redirect('/');
+                            } else {
+                                return res.status(400).send("Tipo de usuario desconocido");
+                            }
                         }
                     });
                 });

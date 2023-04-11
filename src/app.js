@@ -62,13 +62,16 @@ app.get('/', (req,res) => {
     }
 });
 
-app.get('/', (req,res) => {
+app.get('/admin/home', (req, res) => {
 	if (req.session.loggedin == true) {
-        res.render('admin/productos', {name: req.session.name});
-    } else {
-        res.redirect('/login');
-    }
-});
+	  res.render('admin/home', { name: req.session.name });
+	} else {
+	  res.redirect('/login');
+	}
+  });
+  
+
+//Comprobación de Admin o Usuario
 
 app.get('/nosotros', (req,res) => {
 	if (req.session.loggedin == true) {
