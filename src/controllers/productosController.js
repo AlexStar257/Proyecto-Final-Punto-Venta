@@ -23,27 +23,33 @@ controller.list = (req,res) =>{
 };
 
 controller.save = (req, res) => {
-    const data = req.body;
-  
-    // Verificar si los campos requeridos no están vacíos
-    if (!data.nombre || !data.descripcion || !data.precio || !data.urlImagen) {
+  const data = req.body;
+
+  // Verificar si los campos requeridos no están vacíos
+  if (!data.nombre || !data.descripcion || !data.precio || !req.file) {
       res.status(400).json({ message: 'Los campos nombre, descripción, precio y url de imagen son requeridos' });
       return;
-    }
-  
-    req.getConnection((err, conn) => {
+  }
+
+  // Obtener el nombre del archivo subido
+  const urlImagen = req.file.filename;
+
+data.urlImagen = urlImagen;
+
+  req.getConnection((err, conn) => {
       conn.query('INSERT INTO productos SET ?', [data], (err, productos) => {
-        if (err) {
-          console.log(err);
-          res.status(500).json({ message: 'Error interno del servidor' });
-          return;
-        }
-  
-        res.redirect('/productos');
+          if (err) {
+              console.log(err);
+              res.status(500).json({ message: 'Error interno del servidor' });
+              return;
+          }
+
+          res.redirect('/productos');
       });
-    });
-  };
-  
+  });
+};
+
+
 
 controller.delete = (req,res)=>{
     const {id} = req.params;
@@ -130,7 +136,5 @@ controller.buscar = (req, res) => {
       });
     });
   };
-  
-  
 
 module.exports = controller;

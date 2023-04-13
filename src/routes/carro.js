@@ -11,15 +11,15 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 
-const productosController = require('../controllers/productosController');
+const carroController = require('../controllers/carroController');
 
-router.get('/productos', productosController.list);
-// router.post('/add', upload.single('urlImagen'),productosController.save);
-router.get('/delete/:id', productosController.delete);
-router.get('/update/:id', productosController.edit);
-router.post('/update/:id', productosController.update);
-router.get('/buscar', productosController.buscar);
-router.get('/estado/:id', productosController.estado);
+router.get('/carro', carroController.list);
+// router.post('/add', upload.single('urlImagen'),carroController.save);
+router.get('/delete/:id', carroController.delete);
+router.get('/update/:id', carroController.edit);
+router.post('/update/:id', carroController.update);
+router.get('/buscar', carroController.buscar);
+router.get('/estado/:id', carroController.estado);
 
 router.post('/add', (req, res, next) => {
     upload.single('urlImagen')(req, res, (err) => {
@@ -31,7 +31,7 @@ router.post('/add', (req, res, next) => {
         next();
       }
     });
-  }, productosController.save);
+  }, carroController.save);
   
 
 module.exports = router;
