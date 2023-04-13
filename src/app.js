@@ -47,10 +47,11 @@ app.use(session({
 
 //Importando rutas
 const productosRoutes = require('./routes/productos');
-// const carroRoutes = require('./routes/carro');
+const carroRoutes = require('./routes/carro');
 //Rutas
 app.use('/', productosRoutes);
-// app.use('/', carroRoutes);
+app.use('/', carroRoutes);
+
 
 app.get('/', (req,res) => {
 	if (req.session.loggedin == true) {
@@ -70,6 +71,13 @@ app.get('/admin/home', (req, res) => {
 app.get('/nosotros', (req,res) => {
 	if (req.session.loggedin == true) {
         res.render('usuarios/nosotros', {name: req.session.name});
+    } else {
+        res.redirect('/login');
+    }
+});
+app.get('/contacto', (req,res) => {
+	if (req.session.loggedin == true) {
+        res.render('usuarios/contacto', {name: req.session.name});
     } else {
         res.redirect('/login');
     }

@@ -13,7 +13,9 @@ const upload = multer({ storage: storage })
 
 const carroController = require('../controllers/carroController');
 
-router.get('/carro', carroController.list);
+router.get('/carro', carroController.list); // aquí asignamos la función "list" a la ruta "/carro"
+
+// router.get('/carro', carroController.list);
 // router.post('/add', upload.single('urlImagen'),carroController.save);
 router.get('/delete/:id', carroController.delete);
 router.get('/update/:id', carroController.edit);
