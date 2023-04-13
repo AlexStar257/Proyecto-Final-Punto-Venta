@@ -49,7 +49,33 @@ data.urlImagen = urlImagen;
   });
 };
 
+controller.update = (req, res) => {
+  const { id } = req.params;
+  const nuevoProducto = req.body;
 
+  req.getConnection((err, conn) => {
+    if (req.file) {
+      // si se cargó una imagen, actualizar la imagen del producto
+      nuevoProducto.urlImagen = req.file.filename;
+    }
+    conn.query('UPDATE productos set ? WHERE id = ?', [nuevoProducto, id], (err, rows) => {
+      if (err) {
+        console.log(err);
+      }
+      res.redirect('/productos');
+    });
+  });
+};
+
+// controller.update = (req,res)=>{
+//     const {id} = req.params;
+//     const nuevoProducto = req.body;
+//     req.getConnection((err,conn)=>{
+//         conn.query('UPDATE productos set ? WHERE id = ?',[nuevoProducto, id], (err,rows)=>{
+//             res.redirect('/productos');
+//         });
+//         });
+// };
 
 controller.delete = (req,res)=>{
     const {id} = req.params;
@@ -71,15 +97,7 @@ controller.edit = (req,res)=>{
     });
 };
 
-controller.update = (req,res)=>{
-    const {id} = req.params;
-    const nuevoProducto = req.body;
-    req.getConnection((err,conn)=>{
-        conn.query('UPDATE productos set ? WHERE id = ?',[nuevoProducto, id], (err,rows)=>{
-            res.redirect('/productos');
-        });
-        });
-};
+
 
 controller.buscar = (req, res) => {
     const { q } = req.query;

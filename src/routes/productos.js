@@ -17,7 +17,7 @@ router.get('/productos', productosController.list);
 // router.post('/add', upload.single('urlImagen'),productosController.save);
 router.get('/delete/:id', productosController.delete);
 router.get('/update/:id', productosController.edit);
-router.post('/update/:id', productosController.update);
+// router.post('/update/:id', productosController.update);
 router.get('/buscar', productosController.buscar);
 router.get('/estado/:id', productosController.estado);
 
@@ -33,5 +33,6 @@ router.post('/add', (req, res, next) => {
     });
   }, productosController.save);
   
+  router.post('/productos/:id/update', upload.single('imagen'), productosController.update);
 
 module.exports = router;
