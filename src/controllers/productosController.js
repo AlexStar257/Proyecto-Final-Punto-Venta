@@ -14,7 +14,7 @@ controller.list = (req,res) =>{
             if(err){
                 res.json(err); //next(err);
             }
-            console.log(productos);
+            //console.log(productos);
             res.render('admin/productos',{
                 data: productos,
             });

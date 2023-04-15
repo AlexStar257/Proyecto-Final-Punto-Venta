@@ -35,8 +35,8 @@ li{
     justify-content: space-between;
 }
 .imgNosotros{
-    width: 200px;
-  height: 200px;
+    width: 600px;
+  height: 400px;
 }
 
 #cuadro{
@@ -58,3 +58,23 @@ li{
 .texto{
     justify-content: center;
 }
+#carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px; /* adjust this to the desired height */
+}
+  
+  .carousel {
+    width: 600px; /* adjust this to the desired width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #InfoCarru{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
