@@ -1,5 +1,6 @@
 #Contenedor{
     background-color: wheat;
+    padding: 100px;
 }
 
 h2{
@@ -17,7 +18,9 @@ h3{
 
 p{
     font-family: 'Century Gothic';
-    font-size: 20px;
+    font-size: 18px;
+    justify-content: center;
+    padding: 10px;
 }
 
 li{
@@ -27,13 +30,11 @@ li{
 
 #Info{
     display: flex;
-    
+    justify-content: center;
     align-items: center;
     justify-content: space-between;
 }
-.seccionA{
-    
-}
+
 
 #cuadro{
     display: flex;
@@ -46,4 +47,11 @@ li{
 #Sub-cuadro{
     margin: 10px;
     background-color: rgb(211, 181, 125);
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-direction:row;
+}
+.texto{
+    justify-content: center;
 }
