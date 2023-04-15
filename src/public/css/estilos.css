@@ -27,9 +27,12 @@ li{
 
 #Info{
     display: flex;
-    justify-content: center;
+    
     align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
+}
+.seccionA{
+    
 }
 
 #cuadro{
