@@ -78,3 +78,13 @@ li{
     align-items: center;
   }
   
+
+
+  .card-img-top {
+    width: 500;
+    height: 400%;
+  }
+
+  .cartas{
+    padding: 20px;
+  }

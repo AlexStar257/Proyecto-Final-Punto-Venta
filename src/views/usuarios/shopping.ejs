@@ -1,0 +1,55 @@
+<%- include('../partials/main') %>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-5">
+                <table class="table table-dark table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Imagen</th>
+                            <th>Disponibilidad</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (data) { %>
+                            <% for(var i=0; i < data.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <%= data[i].id %>
+                                    </td>
+                                    <td>
+                                        <%= data[i].nombre %>
+                                    </td>
+                                    <td>
+                                        <%= data[i].descripcion %>
+                                    </td>
+                                    <td>
+                                        <%= data[i].precio %>
+                                    </td>
+                                    <!-- <td><%= data[i].urlImagen %></td> -->
+                                    <td><img src="/uploads/<%= data[i].urlImagen %>" alt="<%= data[i].nombre %>"
+                                            style="height: 150px; width:150px" /></td>
+                                    <td>
+                                        <%= data[i].disponibilidad %>
+                                    </td>
+                                    <td>
+                                        <%= data[i].estado %>
+                                    </td>
+                                    <td class="" style="white-space: nowrap;">
+                                        <a href="/estado/<%= data[i].id %>" class="btn btn-info me-2">Estado</a>
+                                        <a href="/update/<%= data[i].id %>" class="btn btn-info me-2">Editar</a>
+                                        <a href="/delete/<%= data[i].id %>" class="btn btn-danger me-2">Eliminar</a>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

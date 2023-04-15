@@ -155,4 +155,18 @@ controller.buscar = (req, res) => {
     });
   };
 
+
+//Carrito de Compras 
+
+controller.agregarProducto = (req, res) => {
+  const {id} = req.params;
+  req.getConnection((err,conn)=>{
+      conn.query('SELECT * FROM productos WHERE id = ?',[id], (err,productos)=>{
+          res.render('usuarios/shopping',{
+          data: productos[0]
+      });
+      });
+  });
+};
+
 module.exports = controller;
