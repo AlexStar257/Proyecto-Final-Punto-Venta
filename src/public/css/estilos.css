@@ -27,14 +27,17 @@ li{
     font-family: 'Century Gothic';
     font-size: 20px;
 }
-
+/*nosotros*/
 #Info{
     display: flex;
     justify-content: center;
     align-items: center;
     justify-content: space-between;
 }
-
+.imgNosotros{
+    width: 200px;
+  height: 200px;
+}
 
 #cuadro{
     display: flex;
