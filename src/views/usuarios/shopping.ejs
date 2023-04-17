@@ -16,7 +16,7 @@
       <tbody id="items"></tbody>
       <tfoot>
         <tr id="footer">
-          <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
+          <th scope="row" colspan="5">Carrito vacío - ¡Parece que no hay productos disponibles!</th>
         </tr>
       </tfoot>
     </table>
@@ -27,10 +27,11 @@
     <td>10</td>
     <td>
       <button class="btn btn-danger btn-sm" id="vaciar-carrito">
-        vaciar todo
+        Vaciar carrito
       </button>
     </td>
-    <td class="font-weight-bold">$ <span>5000</span></td>
+    <td><button id="btn-comprar" class="btn btn-success">Comprar</button></td>
+    <td class="font-weight-bold">$<span>5000</span></td>
   </template>
 
   <template id="template-carrito">
@@ -47,24 +48,20 @@
           -
         </button>
       </td>
-      <td>$ <span>500</span></td>
+      <td> <span>500</span></td>
     </tr>
   </template>
-  <div class="cartas">
   <template id="template-card">
-    
         <div class="col-sm-2 mb-6 py-3" style="padding: 20px;">
           <div class="card h-100 border-dark bg-light" >
-        <img class="card-img-top" >
+        <img class="card-img-top">
         <div class="card-body" >
           <h5 class="card-title">Nombre</h5>
-          <p class="card-text" style="margin: -10px;">Descripcion</p>
-          <p class="card-text" style="margin: -10px;">0</p>
-          <p class="card-subtitle mb-2 text-muted" style="margin: -10px;">precio</p>
+          <p class="card-text" style="margin: -10px;" id="">Descripcion</p>
+          <p class="card-text" style="margin: -10px;" id="">$0</p>
+          <p class="card-text" style="margin: -10px;" id="">Stock:0</p>
           <button class="btn btn-dark" style="margin: -10px;">Añadir al carrito</button>
         </div>
-      </div>
-    
   </template>
 </div>
   <script src="/js/mainCarrito.js"></script>

@@ -17,7 +17,8 @@ function auth(req, res) {
                 userdata.forEach(element => {
                     bcrypt.compare(data.password, element.password, (err, isMatch) => {
                         if (!isMatch) {
-                            return res.status(400).send("¡Contraseña Incorrecta!");
+                            res.status(400).send("¡Contraseña Incorrecta!");
+                            return;
                         } else {
                             if (element.tipo === 'administrador') {
                                 req.session.loggedin = true;
@@ -83,10 +84,37 @@ function logout(req, res) {
     }
     res.redirect('/login');
 }
+
+function listUsuarios(req, res) {
+    req.getConnection((err, conn) => {
+        conn.query('SELECT * FROM usuarios', (err, productos) => {
+            if (err) {
+                res.json(err); //next(err);
+            }
+            if (req.session.loggedin == true) {
+                res.render('admin/usuarios', { name: req.session.name, data: productos, });
+            } else {
+                res.redirect('/login');
+            }
+        });
+    });
+};
+
+function deleteUsuario(req, res) {
+    const { email } = req.params;
+    req.getConnection((err, conn) => {
+        conn.query('DELETE FROM usuarios WHERE email = ?', [email], (err, rows) => {
+            res.redirect('/usuarios');
+        })
+    })
+};
+
 module.exports = {
     login,
     register,
     storeUser,
     auth,
     logout,
+    listUsuarios,
+    deleteUsuario,
 }

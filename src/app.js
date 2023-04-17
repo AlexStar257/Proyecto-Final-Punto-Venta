@@ -53,11 +53,8 @@ app.use('/', carroRoutes);
 app.use('/', loginRoutes);
 
 app.get('/', (req,res) => {
-	if (req.session.loggedin == true) {
         res.render('home', {name: req.session.name});
-    } else {
-        res.redirect('/login');
-    }
+
 });
 app.get('/admin/home', (req, res) => {
 	if (req.session.loggedin == true) {
@@ -68,18 +65,12 @@ app.get('/admin/home', (req, res) => {
   });
 //Comprobación de Admin o Usuario
 app.get('/nosotros', (req,res) => {
-	if (req.session.loggedin == true) {
         res.render('usuarios/nosotros', {name: req.session.name});
-    } else {
-        res.redirect('/login');
-    }
+
 });
 app.get('/contacto', (req,res) => {
-	if (req.session.loggedin == true) {
         res.render('usuarios/contacto', {name: req.session.name});
-    } else {
-        res.redirect('/login');
-    }
+
 });
 
 //Archivos estáticos
