@@ -1,36 +1,71 @@
 <%- include('../partials/main') %>
+<div>
+  <h1>Carrito</h1>
+  <hr>
+  <div class="row" id="cards"></div>
+  <h4>Carrito de compras</h4>
+  <table class="table">
+  <thead>
+      <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Acción</th>
+      <th scope="col">Total</th>
+      </tr>
+  </thead>
+  <tbody id="items"></tbody>
+  <tfoot>
+      <tr id="footer">
+      <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
+      </tr>
+  </tfoot>
+  </table>
+</div>
 
-      <table class="table table-dark table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Imagen</th>
-            <th>Disponibilidad</th>
-            <th>Estado</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if (data) { %> <% for(var i = 0; i < data.length; i++) { %>
-          <tr>
-            <td><%= data[i].id %></td>
-            <td><%= data[i].nombre %></td>
-            <td><%= data[i].descripcion %></td>
-            <td><%= data[i].precio %></td>
-            <!-- <td><%= data[i].urlImagen %></td> -->
-            <td><img src="/uploads/<%= data[i].urlImagen %>" alt="<%= data[i].nombre %>" style="height: 150px; width:150px" /></td>
-            <td><%= data[i].disponibilidad %></td>
-            <td><%= data[i].estado %></td>
-            <td class="" style="white-space: nowrap;">
-              <a href="/agregarCarro/<%= data[i].id %>" class="btn btn-info me-2">Añadir al carrito</a>
-            </td>
-          </tr>
-          <% } %> <% } %>
-        </tbody>
-      </table>
+<template id="template-footer">
+  <th scope="row" colspan="2">Total productos</th>
+  <td>10</td>
+  <td>
+      <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+          vaciar todo
+      </button>
+  </td>
+  <td class="font-weight-bold">$ <span>5000</span></td>
+</template>
+
+<template id="template-carrito">
+<tr>
+  <th scope="row">id</th>
+  <td>Café</td>
+  <td>Descripcion</td>
+  <td>1</td>
+  <td>
+      <button class="btn btn-info btn-sm">
+          +
+      </button>
+      <button class="btn btn-danger btn-sm">
+          -
+      </button>
+  </td>
+  <td>$ <span>500</span></td>
+</tr>
+</template>
+
+<template id="template-card">
+  <div class="col-12 mb-2 col-md-4">
+    <div class="card">
+      <img src="" alt="" class="card-img-top">
+      <div class="card-body">
+        <h5>Nombre</h5>
+        <p>Descripcion</p>
+        <p>precio</p>
+        <p>0</p>
+        <button class="btn btn-dark">Comprar</button>
+      </div>
     </div>
   </div>
-</div>
+</template>
+
+<script src="/src/public/js/mainCarrito.js"></script>
