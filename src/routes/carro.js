@@ -14,6 +14,7 @@ const upload = multer({ storage: storage })
 const carroController = require('../controllers/carroController');
 
 router.get('/carro', carroController.list);
+router.get('/shopping', carroController.listShopping);
 
 router.post('/agregarProducto/:id', carroController.agregarProducto);
 

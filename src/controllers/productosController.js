@@ -15,9 +15,11 @@ controller.list = (req,res) =>{
                 res.json(err); //next(err);
             }
             //console.log(productos);
-            res.render('admin/productos',{
-                data: productos,
-            });
+            if (req.session.loggedin == true) {
+              res.render('admin/productos', {name: req.session.name, data: productos,});
+          } else {
+              res.redirect('/login');
+          }
         });
     });
 };
@@ -90,10 +92,12 @@ controller.edit = (req,res)=>{
     const {id} = req.params;
     req.getConnection((err,conn)=>{
         conn.query('SELECT * FROM productos WHERE id = ?',[id], (err,productos)=>{
-            res.render('admin/editarProductos',{
-            data: productos[0]
-        });
-        });
+          if (req.session.loggedin == true) {
+            res.render('admin/editarProductos', {name: req.session.name, data: productos[0],});
+        } else {
+            res.redirect('/login');
+        }
+      });
     });
 };
 

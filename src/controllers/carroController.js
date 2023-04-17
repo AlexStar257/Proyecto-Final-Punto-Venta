@@ -15,11 +15,32 @@ controller.list = (req,res) =>{
                 res.json(err); //next(err);
             }
             // console.log(productos);
-            res.render('usuarios/carro',{
-                data: productos,
-            });
+            if (req.session.loggedin == true) {
+                res.render('usuarios/carro', {name: req.session.name, data: productos,});
+            } else {
+                res.redirect('/login');
+            }
+            // res.render('usuarios/carro',{
+            //     data: productos,
+            // });
         });
     });
+};
+
+controller.listShopping = (req,res) =>{
+  req.getConnection((err,conn)=>{
+      conn.query('SELECT * FROM carrito_compras', (err, productos)=>{
+          if(err){
+              res.json(err); //next(err);
+          }
+          // console.log(productos);
+          if (req.session.loggedin == true) {
+            res.render('usuarios/shopping', {name: req.session.name, data: productos,});
+        } else {
+            res.redirect('/login');
+        }
+      });
+  });
 };
 
 // Agregar producto al carrito
