@@ -5,15 +5,20 @@
       <div class="col-md-5 offset-md-3 card bg-dark">
         <div class="card-body">
           <form action="/productos/<%= data.id %>/update" method="POST" enctype="multipart/form-data">
-
+            <label class="form-label" style="color: white;" for="">Nombre</label>
             <input type="text" name="nombre" placeholder="Nombre" value="<%= data.nombre%>" class="form-control mb-2"
               autofocus />
+              <label style="color: white;" class="form-label" for="">Descripcion</label>
             <input type="text" name="descripcion" value="<%= data.descripcion%>" placeholder="Descripcion"
               class="form-control mb-2" />
+              <label style="color: white;" class="form-label" for="">Precio</label>
             <input type="number" name="precio" value="<%= data.precio%>" placeholder="Precio"
               class="form-control mb-2" />
+              <label style="color: white;" class="form-label" for="">Imagen</label>
             <input type="file" accept="image/png,image/jpeg" id="urlImagen" name="imagen" value="/uploads/<%= data.urlImagen %>" class="form-control mb-2" autofocus />
             <img src="/uploads/<%= data.urlImagen %>" alt="<%= data.nombre %>" style="height: 150px; width:150px" /></td>
+            <br>
+            <label style="color: white;" class="form-label" for="">Disponibilidad</label>
             <input type="number" name="disponibilidad" value="<%= data.disponibilidad%>" placeholder="Disponibilidad"
               class="form-control mb-2" />
 

@@ -36,9 +36,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-//Relacionado al Login y la sesión
-const loginRoutes = require('./routes/login');
-
 app.use(session({
 	secret: 'secret',
 	resave: true,
@@ -46,12 +43,14 @@ app.use(session({
 }))
 
 //Importando rutas
+//Relacionado al Login y la sesión
+const loginRoutes = require('./routes/login');
 const productosRoutes = require('./routes/productos');
 const carroRoutes = require('./routes/carro');
 //Rutas
 app.use('/', productosRoutes);
 app.use('/', carroRoutes);
-
+app.use('/', loginRoutes);
 
 app.get('/', (req,res) => {
 	if (req.session.loggedin == true) {
@@ -83,12 +82,8 @@ app.get('/contacto', (req,res) => {
     }
 });
 
-
 //Archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', loginRoutes);
-
 
 //Imágenes 
 app.use('/uploads', express.static('uploads'));

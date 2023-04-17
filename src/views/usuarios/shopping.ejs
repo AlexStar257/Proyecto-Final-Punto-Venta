@@ -1,52 +1,70 @@
 <%- include('../partials/main') %>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-5">
-                <table class="table table-dark table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Precio</th>
-                            <th>Imagen</th>
-                            <th>Cantidad</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% if (data) { %>
-                            <% for(var i=0; i < data.length; i++) { %>
-                                <tr>
-                                    <td>
-                                        <%= data[i].id %>
-                                    </td>
-                                    <td>
-                                        <%= data[i].nombre %>
-                                    </td>
-                                    <td>
-                                        <%= data[i].descripcion %>
-                                    </td>
-                                    <td>
-                                        <%= data[i].precio %>
-                                    </td>
-                                    <!-- <td><%= data[i].urlImagen %></td> -->
-                                    <td><img src="/uploads/<%= data[i].urlImagen %>" alt="<%= data[i].nombre %>"
-                                            style="height: 150px; width:150px" /></td>
-                                    <td>
-                                        <%= data[i].disponibilidad %>
-                                    </td>
-                                    <td>
-                                        <%= data[i].estado %>
-                                    </td>
-                                    <td class="" style="white-space: nowrap;">
-                                        <a href="/estado/<%= data[i].id %>" class="btn btn-info me-2">Estado</a>
-                                        <a href="/update/<%= data[i].id %>" class="btn btn-info me-2">Editar</a>
-                                        <a href="/delete/<%= data[i].id %>" class="btn btn-danger me-2">Eliminar</a>
-                                    </td>
-                                </tr>
-                                <% } %>
-                                    <% } %>
-                    </tbody>
-                </table>
-            </div>
+  <div style="padding: 20px;">
+    <div class="row" id="cards"></div>
+    <h4 >Carrito de compras</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Acción</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody id="items"></tbody>
+      <tfoot>
+        <tr id="footer">
+          <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <template id="template-footer">
+    <th scope="row" colspan="2">Total productos</th>
+    <td>10</td>
+    <td>
+      <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+        vaciar todo
+      </button>
+    </td>
+    <td class="font-weight-bold">$ <span>5000</span></td>
+  </template>
+
+  <template id="template-carrito">
+    <tr>
+      <th scope="row">id</th>
+      <td>Café</td>
+      <td>Descripcion</td>
+      <td>1</td>
+      <td>
+        <button class="btn btn-info btn-sm">
+          +
+        </button>
+        <button class="btn btn-danger btn-sm">
+          -
+        </button>
+      </td>
+      <td>$ <span>500</span></td>
+    </tr>
+  </template>
+  <div class="cartas">
+  <template id="template-card">
+    
+        <div class="col-sm-2 mb-6 py-3" style="padding: 20px;">
+          <div class="card h-100 border-dark bg-light" >
+        <img class="card-img-top" >
+        <div class="card-body" >
+          <h5 class="card-title">Nombre</h5>
+          <p class="card-text" style="margin: -10px;">Descripcion</p>
+          <p class="card-text" style="margin: -10px;">0</p>
+          <p class="card-subtitle mb-2 text-muted" style="margin: -10px;">precio</p>
+          <button class="btn btn-dark" style="margin: -10px;">Añadir al carrito</button>
         </div>
-    </div>
+      </div>
+    
+  </template>
+</div>
+  <script src="/js/mainCarrito.js"></script>
