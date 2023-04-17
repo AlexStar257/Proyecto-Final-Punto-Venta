@@ -1,7 +1,74 @@
 <%- include('./partials/main') %>
-<div style="padding: 30 px;">
-<h1 >¡Bienvenido <b><%= name %></b>!</h1>
-<center>
-<img style="width: 500px; height: 500px;" src="/img/panes.png" alt="">
-</center>
-</div>
+
+    <body style="background-color: wheat;">
+
+
+        <div id="ContenedorInicio">
+            <h4>¡Bienvenido <b>
+                    <%= name %>
+                </b>!</h4>
+            <p>Te presentamos nuestras categorias en pan</p>
+            <center>
+                <div id="inicio">
+
+                    <div id="carrusel">
+                        <div id="carouselExample" class="carousel slide carousel-fade">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 0"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                    aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                                    aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                                    aria-label="Slide 4"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5"
+                                    aria-label="Slide 5"></button>
+                            </div>
+                            <center>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <h5>Pan Trigo</h5>
+                                        <img class="imgNosotros" src="/img/Trigo.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <h5>Pan Maiz</h5>
+                                        <img class="imgNosotros" src="/img/Maiz.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <h5>Pan Centeno</h5>
+                                        <img class="imgNosotros" src="/img/Centeno.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <h5>Pan Espelta</h5>
+                                        <img class="imgNosotros" src="/img/Espelta.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <h5>Pan Germinado</h5>
+                                        <img class="imgNosotros" src="/img/Germinado.jpg" class="d-block w-100"
+                                            alt="...">
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExample" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExample" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                            </center>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+        </div>
+        </center>
+    </body>
