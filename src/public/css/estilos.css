@@ -1,5 +1,16 @@
+/*LOGIN*/
+#formulario{
+  height: 10px;
+  width: 500px;
+  
+}
+
+
+
 #Contenedor{
     background-color: wheat;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 h2{
@@ -17,19 +28,28 @@ h3{
 
 p{
     font-family: 'Century Gothic';
-    font-size: 20px;
+    font-size: 18px;
+    justify-content: center;
+    padding: 10px;
+    text-align: justify;
 }
 
 li{
     font-family: 'Century Gothic';
     font-size: 20px;
 }
-
+/*nosotros*/
 #Info{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
+}
+.imgNosotros{
+  margin-top: 50px;
+  width: 500px;
+  height: 300px;
+  margin-left: 50px;
 }
 
 #cuadro{
@@ -43,4 +63,41 @@ li{
 #Sub-cuadro{
     margin: 10px;
     background-color: rgb(211, 181, 125);
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-direction:row;
 }
+.texto{
+    justify-content: center;
+}
+#carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px; /* adjust this to the desired height */
+}
+  
+  .carousel {
+    width: 600px; /* adjust this to the desired width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #InfoCarru{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+
+  .card-img-top {
+    width: 500;
+    height: 400%;
+  }
+
+  .cartas{
+    padding: 20px;
+  }

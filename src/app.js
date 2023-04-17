@@ -90,6 +90,14 @@ app.get('/carro', (req,res) => {
     }
 });
 
+app.get('/shopping', (req,res) => {
+	if (req.session.loggedin == true) {
+        res.render('usuarios/shopping', {name: req.session.name});
+    } else {
+        res.redirect('/login');
+    }
+});
+
 //Archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 

@@ -14,7 +14,7 @@ controller.list = (req,res) =>{
             if(err){
                 res.json(err); //next(err);
             }
-            console.log(productos);
+            //console.log(productos);
             res.render('admin/productos',{
                 data: productos,
             });
@@ -154,5 +154,19 @@ controller.buscar = (req, res) => {
       });
     });
   };
+
+
+//Carrito de Compras 
+
+controller.agregarProducto = (req, res) => {
+  const {id} = req.params;
+  req.getConnection((err,conn)=>{
+      conn.query('SELECT * FROM productos WHERE id = ?',[id], (err,productos)=>{
+          res.render('usuarios/shopping',{
+          data: productos[0]
+      });
+      });
+  });
+};
 
 module.exports = controller;
