@@ -23,9 +23,9 @@ app.use(morgan('dev'));
 
 //Conexión Base de Datos
 app.use(myconnection(mysql,{
-	host: 'localhost',
-	user: 'root',
-	password: '',
+	host: '52.32.208.197',
+	user: 'admin123',
+	password: 'admin123',
 	port: 3306,
 	database: 'mtt'
 },'single'));
