@@ -22,14 +22,12 @@ app.engine('ejs', require('ejs').__express);
 app.use(morgan('dev'));
 
 //Conexión Base de Datos
-app.use(myconnection(mysql,{
+const connection = mysql.createConnection({
 	host: '52.32.208.197',
 	user: 'pepito',
 	password: 'pepito',
-	port: 3306,
 	database: 'mtt',
-	authPlugin : 'mysql_native_password'
-}));
+});
 
 //Ocultar rutas(?
 app.use(bodyParser.urlencoded({
