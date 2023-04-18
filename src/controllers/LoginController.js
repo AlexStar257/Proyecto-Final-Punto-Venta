@@ -13,6 +13,9 @@ function auth(req, res) {
     // console.log(data);
     req.getConnection((err, conn) => {
         conn.query('SELECT * FROM usuarios WHERE email = ?', [data.email], (err, userdata) => {
+            if(!userdata){
+                return res.status(400).send("Usuario no encontrado");
+            }
             if (userdata.length > 0) {
                 userdata.forEach(element => {
                     bcrypt.compare(data.password, element.password, (err, isMatch) => {
