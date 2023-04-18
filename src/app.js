@@ -8,7 +8,7 @@ const morgan = require('morgan');
 
 // Iniciar puerto 
 const app = express();
-app.set('port', 4000);
+app.set('port', 80);
 app.listen(app.get('port'), () => {
 	console.log('Iniciando en puerto: ', app.get('port'));
 });
