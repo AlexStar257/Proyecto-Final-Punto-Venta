@@ -26,6 +26,7 @@ app.use(myconnection(mysql,{
 	host: '52.32.208.197',
 	user: 'pepito',
 	password: 'pepito',
+	port: 3306,
 	database: 'mtt'
 },'single'));
 
