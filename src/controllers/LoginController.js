@@ -22,10 +22,12 @@ function auth(req, res) {
                         } else {
                             if (element.tipo === 'administrador') {
                                 req.session.loggedin = true;
+                                req.session.email = element.email;
                                 req.session.name = element.name;
                                 res.redirect('/admin/home');
                             } else if (element.tipo === 'usuario') {
                                 req.session.loggedin = true;
+                                req.session.email = element.email;
                                 req.session.name = element.name;
                                 res.redirect('/');
                             } else {
@@ -100,11 +102,35 @@ function listUsuarios(req, res) {
     });
 };
 
+function listVentas(req, res) {
+    req.getConnection((err, conn) => {
+        conn.query('SELECT * FROM ventas', (err, productos) => {
+            if (err) {
+                res.json(err); //next(err);
+            }
+            if (req.session.loggedin == true) {
+                res.render('admin/registros', { name: req.session.name, data: productos, });
+            } else {
+                res.redirect('/login');
+            }
+        });
+    });
+};
+
 function deleteUsuario(req, res) {
     const { email } = req.params;
     req.getConnection((err, conn) => {
         conn.query('DELETE FROM usuarios WHERE email = ?', [email], (err, rows) => {
             res.redirect('/usuarios');
+        })
+    })
+};
+
+function deleteVenta(req, res) {
+    const { id } = req.params;
+    req.getConnection((err, conn) => {
+        conn.query('DELETE FROM ventas WHERE id = ?', [id], (err, rows) => {
+            res.redirect('/registros');
         })
     })
 };
@@ -117,4 +143,6 @@ module.exports = {
     logout,
     listUsuarios,
     deleteUsuario,
+    listVentas,
+    deleteVenta,
 }

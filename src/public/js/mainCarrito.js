@@ -16,39 +16,49 @@ let carrito = {}
 //Es para esperar a que todo dentro de productos carge para por der usaerce
 document.addEventListener('DOMContentLoaded', () => {
     fetchData()
-    if(localStorage.getItem('carrito')){
+    if (localStorage.getItem('carrito')) {
         carrito = JSON.parse(localStorage.getItem('carrito'))
         pintarCarrito()
     }
 })
 
 //Este se usa para pintar el carrito
-cards.addEventListener('click', e =>{
+cards.addEventListener('click', e => {
     addCarrito(e)
 })
 
-items.addEventListener('click', e =>{
+items.addEventListener('click', e => {
     btnAccion(e)
 })
 
 // Escuchar el evento 'click' en el botón de comprar
-footer.addEventListener('click', e => {
-    if (e.target.id === 'btn-comprar') {
-        comprar();
-    }
-})
+// footer.addEventListener('click', e => {
+//     if (e.target.id === 'btn-comprar') {
+//         comprar();
+//     }
+// })
 
 // Función que se ejecuta al hacer click en el botón de comprar
 const comprar = () => {
     // Aquí puedes hacer lo que necesites para completar la compra, como enviar los detalles del carrito a un servidor, mostrar una ventana de confirmación al usuario, etc.
     alert('Gracias por tu compra!');
+    let shoppingCart = localStorage.getItem('carrito');
+    let metodo = document.getElementById('metodo-pago').value;
+    axios.post('/comprar', {
+        carrito: shoppingCart,
+        metodo,
+    }, {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
     carrito = {}
     pintarCarrito()
+    location.reload();
 }
 
-
 //Este se encarga de leer el json para poder sacar la informacion, este es que vamos a cambiar para la base de datos
-const fetchData = async () =>{
+const fetchData = async () => {
     try {
         const res = await fetch('/getProductos')
         const data = await res.json()
@@ -64,7 +74,7 @@ const pintarCard = data => {
     data.forEach(producto => {
         if (producto.estado === "activado") {
             templateCard.querySelector("h5").textContent = producto.nombre
-            templateCard.querySelectorAll("p")[0].textContent = producto.descripcion       
+            templateCard.querySelectorAll("p")[0].textContent = producto.descripcion
             templateCard.querySelectorAll("p")[1].textContent = producto.disponibilidad
             templateCard.querySelectorAll("p")[2].textContent = producto.precio
             templateCard.querySelector("img").setAttribute("src", "/uploads/" + producto.urlImagen);
@@ -76,17 +86,16 @@ const pintarCard = data => {
     cards.appendChild(fragment)
 }
 
-
 //Este se encarga de agregar el carrito, checando que existe el carrito
-const addCarrito = e =>{
-    if(e.target.classList.contains('btn-dark')){
+const addCarrito = e => {
+    if (e.target.classList.contains('btn-dark')) {
         setCarrito(e.target.parentElement)
     }
     e.stopPropagation()
 }
 
 //se encarga de mandar toda la informacion de los divs de los productos
-const setCarrito = objeto =>{
+const setCarrito = objeto => {
     //Este se encarga de sacar los elementos dentro de los div
     const producto = {
         /*El querySelector se usa para poder identificar objetos dentro del div y usarlos, si este es unico solo es 
@@ -99,28 +108,28 @@ const setCarrito = objeto =>{
         cantidad: 1
     }
     //Esta Checa si existe el producto y le agrega la cantidad
-//     if(carrito.hasOwnProperty(producto.id)){
-//         producto.cantidad = carrito[producto.id].cantidad + 1
-//     }
-//     //este se encarga de empujar  los elementos dentro del carrito
-//     carrito[producto.id] = {...producto}
-//     pintarCarrito()
-// }
+    //     if(carrito.hasOwnProperty(producto.id)){
+    //         producto.cantidad = carrito[producto.id].cantidad + 1
+    //     }
+    //     //este se encarga de empujar  los elementos dentro del carrito
+    //     carrito[producto.id] = {...producto}
+    //     pintarCarrito()
+    // }
 
-if(carrito.hasOwnProperty(producto.id)){
-    producto.cantidad = carrito[producto.id].cantidad + 1
-  } else {
-    producto.cantidad = 1
-  }
-  
-  if(producto.cantidad > producto.disponibilidad) {
-    // Si la cantidad es mayor que la disponibilidad, no agregues el producto al carrito y muestra un mensaje de error
-    alert("La cantidad que deseas agregar supera la disponibilidad del producto");
-  } else {
-    // Agrega el producto al carrito solo si la cantidad no supera la disponibilidad
-    carrito[producto.id] = {...producto}
-    pintarCarrito()
-  }
+    if (carrito.hasOwnProperty(producto.id)) {
+        producto.cantidad = carrito[producto.id].cantidad + 1
+    } else {
+        producto.cantidad = 1
+    }
+
+    if (producto.cantidad > producto.disponibilidad) {
+        // Si la cantidad es mayor que la disponibilidad, no agregues el producto al carrito y muestra un mensaje de error
+        alert("La cantidad que deseas agregar supera la disponibilidad del producto");
+    } else {
+        // Agrega el producto al carrito solo si la cantidad no supera la disponibilidad
+        carrito[producto.id] = { ...producto }
+        pintarCarrito()
+    }
 }
 //Este se encarga de pintar lo que tenga el tamplete del carrito
 const pintarCarrito = () => {
@@ -147,17 +156,17 @@ const pintarCarrito = () => {
 }
 
 //Este se encarga de pintar lo que tenga el tamplete del footer o mejor dicho, lo que esta debajo del carrito
-const pintarFooter = () =>{
+const pintarFooter = () => {
     footer.innerHTML = ""
-    if(Object.keys(carrito).length === 0 ){
+    if (Object.keys(carrito).length === 0) {
         footer.innerHTML = `
         <th scope="row" colspan="5">Carrito vacío - ¡Agrega productos!</th>
         `
         return
     }
     //este es el que se encarga de acumular las cantidades
-    const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad,0)
-    const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio,0)
+    const nCantidad = Object.values(carrito).reduce((acc, { cantidad }) => acc + cantidad, 0)
+    const nPrecio = Object.values(carrito).reduce((acc, { cantidad, precio }) => acc + cantidad * precio, 0)
     //Este se encarga de mander los resultados al footer del carrito
     tamplateFooter.querySelectorAll('td')[0].textContent = nCantidad
     tamplateFooter.querySelector('span').textContent = nPrecio
@@ -168,7 +177,7 @@ const pintarFooter = () =>{
 
     //Este se encarga de hacer el baiado del carrito de manra general
     const btnVacias = document.getElementById('vaciar-carrito')
-    btnVacias.addEventListener('click',() => {
+    btnVacias.addEventListener('click', () => {
         carrito = {}
         pintarCarrito()
     })
@@ -178,19 +187,19 @@ const pintarFooter = () =>{
 const btnAccion = e => {
     const producto = carrito[e.target.dataset.id]
     if (e.target.classList.contains('btn-info')) {
-      if (producto.cantidad >= producto.disponibilidad) {
-        alert("La cantidad que deseas agregar supera la disponibilidad del producto");
-        // Aquí puedes mostrar un mensaje de error o deshabilitar el botón de "+"
-      } else {
-        producto.cantidad++
-        carrito[e.target.dataset.id] = {...producto}
-        pintarCarrito();
-      }
+        if (producto.cantidad >= producto.disponibilidad) {
+            alert("La cantidad que deseas agregar supera la disponibilidad del producto");
+            // Aquí puedes mostrar un mensaje de error o deshabilitar el botón de "+"
+        } else {
+            producto.cantidad++
+            carrito[e.target.dataset.id] = { ...producto }
+            pintarCarrito();
+        }
     }
-    if(e.target.classList.contains('btn-danger')){
+    if (e.target.classList.contains('btn-danger')) {
         producto.cantidad--
-        carrito[e.target.dataset.id] = {...producto}
-        if(producto.cantidad === 0){
+        carrito[e.target.dataset.id] = { ...producto }
+        if (producto.cantidad === 0) {
             delete carrito[e.target.dataset.id]
         }
         pintarCarrito();

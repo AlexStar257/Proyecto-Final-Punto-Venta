@@ -1,0 +1,27 @@
+<%- include('../partials/admin') %>
+<table class="table table-dark table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Id Compra</th>
+        <th>Email Usuario</th>
+        <th>Método Pago</th>
+        <th>Total Compra</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (data) { %>
+        <% for(var i=0; i < data.length; i++) { %>
+          <tr>
+            <td><%= data[i].id %></td>
+            <td><%= data[i].id_email %></td>
+            <td><%= data[i].metodoPago %></td>
+            <td><%= data[i].total %></td>
+            <td class="" style="white-space: nowrap;">
+                <a href="/deleteVenta/<%= data[i].id %>" class="btn btn-danger me-2">Eliminar</a>
+              </td>
+          </tr>
+          <% } %>
+            <% } %>
+    </tbody>
+  </table>

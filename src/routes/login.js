@@ -10,4 +10,6 @@ router.post('/register', LoginController.storeUser);
 router.get('/logout', LoginController.logout);
 router.get('/usuarios', LoginController.listUsuarios);
 router.get('/deleteUsuario/:email', LoginController.deleteUsuario);
+router.get('/registros', LoginController.listVentas);
+router.get('/deleteVenta/:id', LoginController.deleteVenta);
 module.exports = router;
