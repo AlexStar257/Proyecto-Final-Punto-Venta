@@ -1,6 +1,6 @@
 const express = require('express');
 const myconnection = require('express-myconnection');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path')
@@ -22,12 +22,22 @@ app.engine('ejs', require('ejs').__express);
 app.use(morgan('dev'));
 
 //Conexión Base de Datos
-const connection = mysql.createConnection({
+app.use(myconnection(mysql,{
 	host: '52.32.208.197',
 	user: 'pepito',
 	password: 'pepito',
-	database: 'mtt',
-});
+	port: 3306,
+	database: 'mtt'
+},'single'));
+
+// app.use(myconnection(mysql,{
+// 	host: 'localhost',
+// 	user: 'root',
+// 	password: '',
+// 	port: 3306,
+// 	database: 'mtt'
+// },'single'));
+
 
 //Ocultar rutas(?
 app.use(bodyParser.urlencoded({
