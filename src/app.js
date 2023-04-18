@@ -1,6 +1,6 @@
 const express = require('express');
 const myconnection = require('express-myconnection');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path')
@@ -27,8 +27,9 @@ app.use(myconnection(mysql,{
 	user: 'pepito',
 	password: 'pepito',
 	port: 3306,
-	database: 'mtt'
-},'single'));
+	database: 'mtt',
+	authPlugin : 'mysql_native_password'
+}));
 
 //Ocultar rutas(?
 app.use(bodyParser.urlencoded({
