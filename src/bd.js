@@ -2,11 +2,13 @@ const mysql = require('mysql');
 const pool = mysql.createPool({
     connectionLimit : 20,
     host: '52.32.208.197',
-    user:   'pepito',
-    password: 'pepito',
+    user:   'ryu',
+    password: 'ryu',
     database: 'mtt',
 });
 
+
+module.exports = pool;
 // const pool = mysql.createPool({
 //     connectionLimit : 20,
 //     host: 'localhost',
@@ -14,5 +16,3 @@ const pool = mysql.createPool({
 //     password: '',
 //     database: 'mtt',
 // });
-
-module.exports = pool;
