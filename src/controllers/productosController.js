@@ -1,5 +1,5 @@
 const controller = {};
-
+const pool = require('../bd.js');
 function login(req, res) {
     if (req.session.loggedin != true) {
         res.render('login/index');
@@ -9,7 +9,7 @@ function login(req, res) {
 }
 
 controller.list = (req,res) =>{
-    req.getConnection((err,conn)=>{
+    pool.getConnection((err,conn)=>{
         conn.query('SELECT * FROM productos', (err, productos)=>{
             if(err){
                 res.json(err); //next(err);
@@ -38,7 +38,7 @@ controller.save = (req, res) => {
 
 data.urlImagen = urlImagen;
 
-  req.getConnection((err, conn) => {
+  pool.getConnection((err, conn) => {
       conn.query('INSERT INTO productos SET ?', [data], (err, productos) => {
           if (err) {
               console.log(err);
@@ -55,7 +55,7 @@ controller.update = (req, res) => {
   const { id } = req.params;
   const nuevoProducto = req.body;
 
-  req.getConnection((err, conn) => {
+  pool.getConnection((err, conn) => {
     if (req.file) {
       // si se cargó una imagen, actualizar la imagen del producto
       nuevoProducto.urlImagen = req.file.filename;
@@ -72,7 +72,7 @@ controller.update = (req, res) => {
 // controller.update = (req,res)=>{
 //     const {id} = req.params;
 //     const nuevoProducto = req.body;
-//     req.getConnection((err,conn)=>{
+//     pool.getConnection((err,conn)=>{
 //         conn.query('UPDATE productos set ? WHERE id = ?',[nuevoProducto, id], (err,rows)=>{
 //             res.redirect('/productos');
 //         });
@@ -81,7 +81,7 @@ controller.update = (req, res) => {
 
 controller.delete = (req,res)=>{
     const {id} = req.params;
-    req.getConnection((err,conn)=>{
+    pool.getConnection((err,conn)=>{
         conn.query('DELETE FROM productos WHERE id = ?',[id], (err, rows)=>{
             res.redirect('/productos');
         })
@@ -90,7 +90,7 @@ controller.delete = (req,res)=>{
 
 controller.edit = (req,res)=>{
     const {id} = req.params;
-    req.getConnection((err,conn)=>{
+    pool.getConnection((err,conn)=>{
         conn.query('SELECT * FROM productos WHERE id = ?',[id], (err,productos)=>{
           if (req.session.loggedin == true) {
             res.render('admin/editarProductos', {name: req.session.name, data: productos[0],});
@@ -105,7 +105,7 @@ controller.edit = (req,res)=>{
 
 controller.buscar = (req, res) => {
     const { q } = req.query;
-    req.getConnection((err, conn) => {
+    pool.getConnection((err, conn) => {
       conn.query(
         'SELECT * FROM productos WHERE id LIKE ?',
         [`%${q}%`],
@@ -124,7 +124,7 @@ controller.buscar = (req, res) => {
   controller.estado = (req, res) => {
     const { id } = req.params;
   
-    req.getConnection((err, conn) => {
+    pool.getConnection((err, conn) => {
       conn.query('SELECT estado FROM productos WHERE id = ?', [id], (err, rows) => {
         if (err) {
           console.log(err);
@@ -164,7 +164,7 @@ controller.buscar = (req, res) => {
 
 controller.agregarProducto = (req, res) => {
   const {id} = req.params;
-  req.getConnection((err,conn)=>{
+  pool.getConnection((err,conn)=>{
       conn.query('SELECT * FROM productos WHERE id = ?',[id], (err,productos)=>{
           res.render('usuarios/shopping',{
           data: productos[0]

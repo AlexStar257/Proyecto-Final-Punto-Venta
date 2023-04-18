@@ -1,5 +1,5 @@
 const controller = {};
-
+const pool = require('../bd.js');
 function login(req, res) {
     if (req.session.loggedin != true) {
         res.render('login/index');
@@ -9,7 +9,7 @@ function login(req, res) {
 }
 
 controller.list = (req,res) =>{
-    req.getConnection((err,conn)=>{
+    pool.getConnection((err,conn)=>{
         conn.query('SELECT * FROM productos', (err, productos)=>{
             if(err){
                 res.json(err);
@@ -24,7 +24,7 @@ controller.list = (req,res) =>{
 };
 
 controller.listShopping = (req,res) =>{
-  req.getConnection((err,conn)=>{
+  pool.getConnection((err,conn)=>{
       conn.query('SELECT * FROM productos', (err, productos)=>{
           if(err){
               res.json(err); //next(err);
@@ -42,7 +42,7 @@ controller.listShopping = (req,res) =>{
 controller.agregarProducto = (req, res) => {
   const { producto_id, cantidad } = req.body;
   const usuario_email = req.session.name; 
-  req.getConnection((err, conn) => {
+  pool.getConnection((err, conn) => {
     conn.query('INSERT INTO carrito_compras (producto_id, cantidad, usuario_email) VALUES (?, ?, ?)', [producto_id, cantidad, usuario_email], (err, result) => {
       if (err) {
         console.log(err);

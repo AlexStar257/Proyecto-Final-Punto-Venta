@@ -22,14 +22,14 @@ app.engine('ejs', require('ejs').__express);
 app.use(morgan('dev'));
 
 //Conexión Base de Datos
-app.use(myconnection(mysql,{
-	host: '52.32.208.197',
-	user: 'pepito',
-	password: 'pepito',
-	port: 3306,
-	database: 'mtt'
-}));
 
+// app.use(myconnection(mysql,{
+// 	host: '52.32.208.197',
+// 	user: 'pepito',
+// 	password: 'pepito',
+// 	port: 3306,
+// 	database: 'mtt'
+// }));
 
 // app.use(myconnection(mysql,{
 // 	host: 'localhost',
@@ -38,7 +38,6 @@ app.use(myconnection(mysql,{
 // 	port: 3306,
 // 	database: 'mtt'
 // },'single'));
-
 
 //Ocultar rutas(?
 app.use(bodyParser.urlencoded({

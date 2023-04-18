@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-
+const pool = require('../bd.js');
 function login(req, res) {
     if (req.session.loggedin != true) {
         res.render('login/index');
@@ -11,7 +11,7 @@ function login(req, res) {
 function auth(req, res) {
     const data = req.body;
     // console.log(data);
-    req.getConnection((err, conn) => {
+    pool.getConnection((err, conn) => {
         conn.query('SELECT * FROM usuarios WHERE email = ?', [data.email], (err, userdata) => {
             if(!userdata){
                 return res.status(400).send("Usuario no encontrado");
@@ -57,7 +57,7 @@ function register(req, res) {
 function storeUser(req, res) {
     const data = req.body;
     // console.log(data);
-    req.getConnection((err, conn) => {
+    pool.getConnection((err, conn) => {
         conn.query('SELECT * FROM usuarios WHERE email = ?', [data.email], (err, userdata) => {
             if (userdata.length > 0) {
                 return res.status(400).send("¡El Usuario YA existe!");
@@ -68,7 +68,7 @@ function storeUser(req, res) {
                     data.domicilio = req.body.domicilio;
                     data.telefono = req.body.telefono;
 
-                    req.getConnection((err, conn) => {
+                    pool.getConnection((err, conn) => {
                         conn.query('INSERT INTO usuarios SET ?', [data], (err, rows) => {
                             req.session.loggedin = false;
                             req.session.name = data.name;
@@ -91,7 +91,7 @@ function logout(req, res) {
 }
 
 function listUsuarios(req, res) {
-    req.getConnection((err, conn) => {
+    pool.getConnection((err, conn) => {
         conn.query('SELECT * FROM usuarios', (err, productos) => {
             if (err) {
                 res.json(err); //next(err);
@@ -106,7 +106,7 @@ function listUsuarios(req, res) {
 };
 
 function listVentas(req, res) {
-    req.getConnection((err, conn) => {
+    pool.getConnection((err, conn) => {
         conn.query('SELECT * FROM ventas', (err, productos) => {
             if (err) {
                 res.json(err); //next(err);
@@ -122,7 +122,7 @@ function listVentas(req, res) {
 
 function deleteUsuario(req, res) {
     const { email } = req.params;
-    req.getConnection((err, conn) => {
+    pool.getConnection((err, conn) => {
         conn.query('DELETE FROM usuarios WHERE email = ?', [email], (err, rows) => {
             res.redirect('/usuarios');
         })
@@ -131,7 +131,7 @@ function deleteUsuario(req, res) {
 
 function deleteVenta(req, res) {
     const { id } = req.params;
-    req.getConnection((err, conn) => {
+    pool.getConnection((err, conn) => {
         conn.query('DELETE FROM ventas WHERE id = ?', [id], (err, rows) => {
             res.redirect('/registros');
         })
