@@ -28,7 +28,7 @@ app.use(myconnection(mysql,{
 	password: 'pepito',
 	port: 3306,
 	database: 'mtt'
-},'request'));
+},'getConnection'));
 
 // app.use(myconnection(mysql,{
 // 	host: 'localhost',
