@@ -1,18 +1,19 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
+// const pool = mysql.createPool({
+//     connectionLimit : 20,
+//     host: '52.32.208.197',
+//     user:   'pepito',
+//     password: 'pepito',
+//     database: 'mtt',
+// });
+
 const pool = mysql.createPool({
     connectionLimit : 20,
-    host: '52.32.208.197',
-    user:   'ryu',
-    password: 'ryu',
+    host: 'localhost',
+    user:   'root',
+    password: '',
     database: 'mtt',
 });
 
-
 module.exports = pool;
-// const pool = mysql.createPool({
-//     connectionLimit : 20,
-//     host: 'localhost',
-//     user:   'root',
-//     password: '',
-//     database: 'mtt',
-// });
+
