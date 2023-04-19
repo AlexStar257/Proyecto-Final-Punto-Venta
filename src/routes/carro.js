@@ -16,19 +16,17 @@ const carroController = require('../controllers/carroController');
 
 router.get('/carro', carroController.list);
 router.get('/shopping', carroController.listShopping);
-router.get('/getProductos',(req,res)=>{
-  pool.getConnection((err,conn)=>{
-    conn.query('SELECT * FROM productos', (err, productos)=>{
-        if(err){
-            res.json(err); //next(err);
-        }
-        res.json(productos);
-})
+router.get('/getProductos', (req, res) => {
+  pool.query('SELECT * FROM productos', (err, productos) => {
+    if (err) {
+      res.json(err); //next(err);
+    }
+    res.json(productos);
   })
 })
 
-router.post('/comprar',(req,res)=>{
-  let {carrito,metodo} = req.body;
+router.post('/comprar', (req, res) => {
+  let { carrito, metodo } = req.body;
   try {
     carrito = JSON.parse(carrito)
   } catch (error) {
@@ -36,13 +34,11 @@ router.post('/comprar',(req,res)=>{
   }
   let total = 0;
   console.log(carrito)
-		for (const [key, value] of Object.entries(carrito)) {
-			total += value.precio * value.cantidad;
+  for (const [key, value] of Object.entries(carrito)) {
+    total += value.precio * value.cantidad;
 
-		}
-  pool.getConnection((err,conn)=>{
-    conn.query('INSERT INTO ventas (total, metodoPago, id_email) VALUES (?, ?, ?)', [total, metodo, req.session.email])
-})
+  }
+  pool.query('INSERT INTO ventas (total, metodoPago, id_email) VALUES (?, ?, ?)', [total, metodo, req.session.email])
 })
 
 
