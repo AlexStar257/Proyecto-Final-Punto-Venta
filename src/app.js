@@ -8,10 +8,7 @@ const morgan = require('morgan');
 
 // Iniciar puerto 
 const app = express();
-app.set('port', 4000);
-app.listen(app.get('port'), () => {
-	console.log('Iniciando en puerto: ', app.get('port'));
-});
+
 
 //Cambiar extensión a archivos ejs
 app.set('views', path.join(__dirname, '/views'));
@@ -96,4 +93,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Imágenes 
 app.use('/uploads', express.static('uploads'));
+
+app.set('port', 4000);
+app.listen(app.get('port'), () => {
+	console.log('Iniciando en puerto: ', app.get('port'));
+});
 
